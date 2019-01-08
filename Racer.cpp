@@ -141,13 +141,13 @@ class Game{
 		void initDisplay(int width , int height){
 			displayWidth = width;
 			displayHeight = height;
-			displayContent = new char[width * (height + 1) + 1];
+			displayContent = new char[((width + 1) * height) + 1];
 
 			for (int i = width; i < height * (width + 1); i += width + 1){
 				displayContent[i] = '\n';
 			}
 
-			displayContent[width * (height + 1)] = '\0';
+			displayContent[(width + 1) * height] = '\0';
 		}
 		
 		void clearDisplay(){
@@ -187,7 +187,7 @@ class Game{
 
 		void spawnEnemyCar(){
 			if (lastCarSpawn <= 0){
-				enemyCars.push_back(Car(rand() % (displayWidth - 5) , displayHeight + 4 , true));
+				enemyCars.push_back(Car(rand() % (displayWidth - enemyCarSprite.width) , displayHeight + enemyCarSprite.height , true));
 				lastCarSpawn = carSpawnInterval;
 			}
 			lastCarSpawn--;
@@ -283,7 +283,6 @@ class Game{
 					boostKeyDown = false;
 				}
 			}
-			
 		}
 
 		void gameLoop(){
@@ -383,8 +382,6 @@ int main(){
 		system("cls");
 	}
 
-
 	return 0;
-
 }
 
